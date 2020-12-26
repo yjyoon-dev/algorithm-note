@@ -15,5 +15,5 @@ long long bino(int n, int r){
 	if(n==r || r==0) return 1;
 	long long& ret = cache[n][r];
 	if(ret!=0) return ret;
-	return ret=bino(n-1,r-1),bino(n-1,r);
+	return ret=bino(n-1,r-1)+bino(n-1,r);
 }
