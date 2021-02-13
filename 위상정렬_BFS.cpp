@@ -50,11 +50,9 @@ int main(){
         ans.push_back(cur);
 
         // 해당 정점과 연결된 정점의 진입 간선을 하나씩 제거 후 0일 경우 큐에 push
-        for(int i:adj[cur]){
-            indegree[i]--;
-            if(indegree[i]==0)
+        for(int i:adj[cur])
+            if(--indegree[i]==0)
                 q.push(i);
-        }
 
         if(q.size()>1) isCertain = false; // 큐의 크기가 1 이상일 경우 가능한 위상 정렬의 결과가 여러개
     }
