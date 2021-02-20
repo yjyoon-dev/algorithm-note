@@ -29,7 +29,7 @@ struct RMQ{
         // 노드 구간이 쿼리 구간에 완전히 포함될 경우 바로 결괏값 반환
         if(left<=nodeLeft && nodeRight<=right) return rangeMin[node];
         int mid = (nodeLeft + nodeRight) / 2;
-        return min(query(left,right,node*2,left,mid),query(left,right,node*2+1,mid+1,right));
+        return min(query(left,right,node*2,nodeLeft,mid),query(left,right,node*2+1,mid+1,nodeRight));
     }
     // index번째 배열의 원소를 newValue 로 갱신할 때
     // node 를 루트로 하는 구간 트리 갱신하기
