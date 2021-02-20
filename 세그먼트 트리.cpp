@@ -35,7 +35,7 @@ struct RMQ{
     // node 를 루트로 하는 구간 트리 갱신하기
     int update(int index, int newValue, int node, int nodeLeft, int nodeRight){
         if(index<nodeLeft || nodeRight<index) return rangeMin[node]; // 구간을 벗어났을 시 기존 값 반환
-        if(nodeLeft==nodeRight) rangeMin[node] = newValue; // 리프 노드 도달 시 갱신
+        if(nodeLeft==nodeRight) return rangeMin[node] = newValue; // 리프 노드 도달 시 갱신
         int mid = (nodeLeft + nodeRight) / 2;
         return rangeMin[node] = min(update(index,newValue,node*2,nodeLeft,mid),update(index,newValue,node*2+1,mid+1,nodeRight));
     }
