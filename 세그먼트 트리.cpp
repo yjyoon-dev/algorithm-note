@@ -16,7 +16,7 @@ struct RMQ{
     }
     // 트리 초기화
     int init(const vector<int>& v, int node, int left, int right){
-        if(left==right) return rangeMin[node]=v[node]; // 리프 노드 도달 시
+        if(left==right) return rangeMin[node]=v[left]; // 리프 노드 도달 시
         int mid = (left + right) / 2;
         return rangeMin[node] = min(init(v,node*2,left,mid),init(v,node*2+1,mid+1,right));
     }
