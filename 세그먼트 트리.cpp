@@ -26,9 +26,9 @@ struct RMQ{
     int query(int left, int right, int node, int nodeLeft, int nodeRight){
         // 쿼리 구간과 전혀 겹치지 않을 경우 반환값이 무시되도록 매우 큰 값 반환
         if(right<nodeLeft || nodeRight<left) return 1e9;
-        // 쿼리 구간이 노드 구간에 완전히 포함될 경우 바로 결괏값 반환
-        if(nodeLeft<=left && right<=nodeRight) return rangeMin[node];
-        int mid = (left + right) / 2;
+        // 노드 구간이 쿼리 구간에 완전히 포함될 경우 바로 결괏값 반환
+        if(left<=nodeLeft && nodeRight<=right) return rangeMin[node];
+        int mid = (nodeLeft + nodeRight) / 2;
         return rangeMin[node] = min(query(left,right,node*2,left,mid),query(left,right,node*2+1,mid+1,right));
     }
     // index번째 배열의 원소를 newValue 로 갱신할 때
