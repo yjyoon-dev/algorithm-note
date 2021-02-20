@@ -12,7 +12,7 @@ struct RMQ{
     RMQ(const vector<int>& v){ // 파라미터: 원본 배열
         n = v.size();
         rangeMin = vector<int>(4*n); // 구간 트리의 노드 갯수는 원본 배열 크기의 4배를 하면 부족하지 않음
-        int temp = init(v,1,0,n-1); // 2를 곱하는 연산을 통해 자손으로 내려가므로 첫번째 노드를 0이 아닌 1부터 시작
+        init(v,1,0,n-1); // 2를 곱하는 연산을 통해 자손으로 내려가므로 첫번째 노드를 0이 아닌 1부터 시작
     }
     // 트리 초기화
     int init(const vector<int>& v, int node, int left, int right){
@@ -29,7 +29,7 @@ struct RMQ{
         // 노드 구간이 쿼리 구간에 완전히 포함될 경우 바로 결괏값 반환
         if(left<=nodeLeft && nodeRight<=right) return rangeMin[node];
         int mid = (nodeLeft + nodeRight) / 2;
-        return rangeMin[node] = min(query(left,right,node*2,left,mid),query(left,right,node*2+1,mid+1,right));
+        return min(query(left,right,node*2,left,mid),query(left,right,node*2+1,mid+1,right));
     }
     // index번째 배열의 원소를 newValue 로 갱신할 때
     // node 를 루트로 하는 구간 트리 갱신하기
