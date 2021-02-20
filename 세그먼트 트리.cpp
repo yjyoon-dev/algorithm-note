@@ -33,10 +33,10 @@ struct RMQ{
     }
     // index번째 배열의 원소를 newValue 로 갱신할 때
     // node 를 루트로 하는 구간 트리 갱신하기
-    int update(int index, int node, int newValue, int nodeLeft, int nodeRight){
+    int update(int index, int newValue, int node, int nodeLeft, int nodeRight){
         if(index<nodeLeft || nodeRight<index) return rangeMin[node]; // 구간을 벗어났을 시 기존 값 반환
         if(nodeLeft==nodeRight) rangeMin[node] = newValue; // 리프 노드 도달 시 갱신
         int mid = (nodeLeft + nodeRight) / 2;
-        return rangeMin[node] = min(update(index,node*2,newValue,nodeLeft,mid),update(index,node*2+1,newValue,mid+1,nodeRight));
+        return rangeMin[node] = min(update(index,newValue,node*2,nodeLeft,mid),update(index,newValue,node*2+1,mid+1,nodeRight));
     }
 };
