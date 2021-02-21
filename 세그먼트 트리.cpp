@@ -40,3 +40,36 @@ struct RMQ{
         return rangeMin[node] = min(update(index,newValue,node*2,nodeLeft,mid),update(index,newValue,node*2+1,mid+1,nodeRight));
     }
 };
+
+
+// 주석 제거버전 (구간 합)
+
+struct SEG{
+    int n;
+    vector<int> tree;
+    SEG(vector<int>& v){
+        n = v.size();
+        tree = vector<int>(4*n);
+        init(v,1,0,n-1);
+    }
+
+    int init(vector<int>& v, int node, int left, int right){
+        if(left==right) return tree[node]=v[left];
+        int mid = (left + right) / 2;
+        return tree[node] = init(v,node*2,left,mid)+init(v,node*2+1,mid+1,right);
+    }
+
+    int query(int left, int right, int node, int nodeLeft, int nodeRight){
+        if(right<nodeLeft || nodeRight<left) return 0;
+        if(left<=nodeLeft && nodeRight<=right) return tree[node];
+        int mid = (nodeLeft + nodeRight) / 2;
+        return query(left,right,node*2,nodeLeft,mid)+query(left,right,node*2+1,mid+1,nodeRight);
+    }
+
+    int update(int index, int newValue, int node, int nodeLeft, int nodeRight){
+        if(index<nodeLeft || nodeRight<index) return tree[node];
+        if(nodeLeft==nodeRight) return tree[node] = newValue;
+        int mid = (nodeLeft + nodeRight) / 2;
+        return tree[node] = update(index,newValue,node*2,nodeLeft,mid)+update(index,newValue,node*2+1,mid+1,nodeRight);
+    }
+};
