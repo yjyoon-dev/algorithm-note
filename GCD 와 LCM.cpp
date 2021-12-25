@@ -5,10 +5,10 @@
 // 3. 항상 b 값이 a 보다 더 작은 값을 유지
 
 int gcd(int a, int b){
-	if(a%b==0) return b;
-	return gcd(b,a%b);
+	if(a % b == 0) return b;
+	return gcd(b, a % b);
 }
 
 int lcm(int a, int b){
-	return (a*b)/gcd(a,b);
+	return (a * b) / gcd(a, b);
 }
